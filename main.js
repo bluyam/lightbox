@@ -33,22 +33,16 @@ function initializeGalleryFromJSON(json) {
   var obj = JSON.parse(json);
   var p = obj.photos.photo;
   for (var i = 0; i < p.length; i++) {
-    var img = document.createElement('img');
     url =  "http://c2.staticflickr.com/"
     url += p[i].farm + '/';
     url += p[i].server + '/';
     url += p[i].id + '_';
     url += p[i].secret + '_n.jpg';
-    img.setAttribute('src',url);
-    var image = new Image();
-    image.src = url;
-    var attr;
-    if (image.width > image.height) attr = "height";
-    else attr = "width";
-    img.setAttribute(attr,100);
+    var image = document.createElement('div');
+    image.setAttribute('style','background-image: url('+url+');');
     var node = document.createElement('li');
     node.setAttribute('class','imageWrapper');
-    node.appendChild(img);
+    node.appendChild(image);
     document.getElementById('imageGallery').appendChild(node);
   }
 }
