@@ -27,8 +27,12 @@ ul li {
   overflow: hidden;
 }
 
-ul li img {
+ul li div {
   display: block;
+  height: 100;
+  background-size: cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
 }
 
 a {
