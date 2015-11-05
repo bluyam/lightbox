@@ -40,10 +40,28 @@ function initializeGalleryFromJSON(json) {
     url += p[i].secret + '_n.jpg';
     var image = document.createElement('div');
     image.setAttribute('style','background-image: url('+url+');');
+    image.setAttribute('id',p[i].id);
+    image.setAttribute('onclick','revealLightbox('+p[i].id+")");
     var node = document.createElement('li');
     node.setAttribute('class','imageWrapper');
     node.appendChild(image);
     document.getElementById('imageGallery').appendChild(node);
+  }
+}
+
+// revealLightbox(id):
+// displays lightbox containing appropriate image
+// when thumbnail is clicked in gallery
+// lightbox is hidden when clicked
+function revealLightbox(id) {
+  var thumbnail = document.getElementById(id);
+  var imageUrl = thumbnail.style.backgroundImage.slice(4,-1).replace(/"/g, "");
+  var overlayImage = document.getElementById('overlayImage');
+  overlayImage.setAttribute('src',imageUrl);
+  var overlay = document.getElementById('overlay');
+  overlay.setAttribute('style','display: block;');
+  overlay.onclick = function() {
+    overlay.setAttribute('style','display: none;');
   }
 }
 
