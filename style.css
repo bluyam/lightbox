@@ -46,11 +46,13 @@ a {
 	position: absolute;
 	top: 0;
 	left: 0;
-	display: none;
+	display: block;
 	text-align: center;
 	color: white;
 }
+
 #overlay img{
 	margin-top: 10%;
+	border:10px solid #FFF;
 
 }

@@ -2,6 +2,9 @@
 // Slack Challenge
 // TODO: Add metadata, clean code, code reviews, etc...
 
+// global data storage of photos
+var photoUrls = new Array();
+
 // construct api call
 var baseURL = "https://api.flickr.com/services/rest/";
 var format = "json";
@@ -38,12 +41,52 @@ function initializeGalleryFromJSON(json) {
     url += p[i].server + '/';
     url += p[i].id + '_';
     url += p[i].secret + '_n.jpg';
+    photoUrls.push(url);
     var image = document.createElement('div');
     image.setAttribute('style','background-image: url('+url+');');
+    image.setAttribute('id',i);
+    image.setAttribute('onclick','revealLightbox('+i+")");
     var node = document.createElement('li');
     node.setAttribute('class','imageWrapper');
     node.appendChild(image);
     document.getElementById('imageGallery').appendChild(node);
+  }
+}
+
+// revealLightbox(id):
+// displays lightbox containing appropriate image
+// when thumbnail is clicked in gallery
+// lightbox is hidden when clicked
+function revealLightbox(id) {
+  var currentImageId = id;
+  var thumbnail = document.getElementById(id);
+  var imageUrl = thumbnail.style.backgroundImage.slice(4,-1).replace(/"/g, "");
+  var overlayImage = document.getElementById('overlayImage');
+  overlayImage.setAttribute('src',imageUrl);
+  var overlay = document.getElementById('overlay');
+  overlay.setAttribute('style','display: block;');
+
+  // anonymous onclick-triggered function():
+  // ensures that the box disappears when clicked
+  overlay.onclick = function() {
+    overlay.setAttribute('style','display: none;');
+  }
+
+  // anonymous onkeydown-triggered function():
+  // implements carousel for left and right arrow keys
+  document.onkeydown = function(e) {
+    // left arrow key pressed
+    if (e.keyCode == '37') {
+      if (currentImageId > 0) {
+        overlayImage.setAttribute('src',photoUrls[--currentImageId]);
+      }
+    }
+    // right arrow key pressed
+    if (e.keyCode == '39') {
+      if (currentImageId < photoUrls.length-1) {
+        overlayImage.setAttribute('src',photoUrls[++currentImageId]);
+      }
+    }
   }
 }
 
