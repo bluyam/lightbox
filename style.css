@@ -1,11 +1,21 @@
-body {
-	font-family: sans-serif;
-	background: #384047;
+h1 {
+	font-family: 'Berkshire Swash', cursive;
+	font-size: 400%;
+	background: #FFF;
+	margin-top: 1em;
+	margin-bottom: auto;
+	color: #f45537;
+	text-align: center;
 }
 
-h1 {
-	color: #fff;
-	text-align: center
+p {
+	font-family: 'Yantramanav', sans-serif;
+	font-weight: 100;
+	font-size: 175%;
+	text-align: center;
+	display: block;
+	margin-top: 0px;
+	margin-bottom: 2em;
 }
 
 ul {
@@ -13,23 +23,23 @@ ul {
 	margin: 0 auto;
 	padding: 0;
 	display: block;
-	max-width: 780px;
+	max-width: 1000px;
 	text-align: center;
 }
 
 ul li {
 	display: inline-block;
-	border:10px solid #FFF;
+	/*border:10px solid #FFF;*/
 	background: white;
 	margin: 10px;
-  width: 100;
-  height: 100;
+  width: 250;
+  height: 250;
   overflow: hidden;
 }
 
 ul li div {
   display: block;
-  height: 100;
+  height: 250;
   background-size: cover;
   background-repeat:   no-repeat;
   background-position: center center;
@@ -53,6 +63,6 @@ a {
 
 #overlay img{
 	margin-top: 10%;
-	border:10px solid #FFF;
+	border:20px solid #FFF;
 
 }
