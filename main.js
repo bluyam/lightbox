@@ -35,7 +35,9 @@ function httpGetAsync(url, callback) {
 function initializeGalleryFromJSON(json) {
   var obj = JSON.parse(json);
   var p = obj.photos.photo;
-  for (var i = 0; i < p.length; i++) {
+  var photoCount = p.length;
+  animateValue("value", 0, photoCount, 500);
+  for (var i = 0; i < photoCount; i++) {
     url =  "http://c2.staticflickr.com/"
     url += p[i].farm + '/';
     url += p[i].server + '/';
@@ -51,6 +53,7 @@ function initializeGalleryFromJSON(json) {
     node.appendChild(image);
     document.getElementById('imageGallery').appendChild(node);
   }
+
 }
 
 // revealLightbox(id):
@@ -88,6 +91,23 @@ function revealLightbox(id) {
       }
     }
   }
+}
+
+// animateValue(id, start, end, duration)
+// animates count up to number of matches
+function animateValue(id, start, end, duration) {
+    var range = end - start;
+    var current = start;
+    var increment = end > start? 1 : -1;
+    var stepTime = Math.abs(Math.floor(duration / range));
+    var obj = document.getElementById(id);
+    var timer = setInterval(function() {
+        current += increment;
+        obj.innerHTML = current;
+        if (current == end) {
+            clearInterval(timer);
+        }
+    }, stepTime);
 }
 
 httpGetAsync(apiCall, initializeGalleryFromJSON);
