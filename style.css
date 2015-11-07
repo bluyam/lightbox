@@ -20,7 +20,7 @@
 }
 
 .topmenu {
-	margin-top: 1.25em;
+	margin-top: 1em;
 	margin-right: 1em;
 	display: inline-block;
 	float:right;
@@ -28,12 +28,21 @@
 
 .topmenu li {
 	margin-left: 7px;
+	margin-top: .5em;
 	margin-right: 1.75em;
 	letter-spacing: 2px;
 	font-size: 80%;
 	display: inline-block;
 
 }
+
+/*img {
+	padding-left: .5em;
+	width: 25;
+	height: 25;
+	float: right;
+	-webkit-filter: invert(50%);
+}*/
 
 body {
 	font-family: 'Yantramanav', sans-serif;
@@ -86,7 +95,7 @@ p3 {
 }
 
 .imageWrapper {
-	border: 1px solid #FFF;
+/*	border: 1px solid #FFF;*/
 	display: inline-block;
 	background: white;
 	margin: 0px;
@@ -141,6 +150,19 @@ a {
 }
 
 #overlay img{
+	position: relative;
+	margin: 0 auto;
+	overflow: hidden;
 	margin-top: 10%;
-	border:20px solid #FFF;
+	height: 250px;
+	border: 5px solid #FFF;
+	/*padding-bottom: 10em;
+	background-color: white;*/
+}
+
+#caption {
+	position: relative;
+	z-index: 10;
+	/*color: grey;
+	background-color: white;*/
 }
