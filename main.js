@@ -4,6 +4,11 @@
 
 // global data storage of photos
 var photoUrls = new Array();
+var photoNames = ['Fluffy','Muffy','Buffy','Tuffy','Scruffy',
+                  'Cuddly','Puddly','Ruddy','Muddy','Buddy',
+                  'Sluggy','Druggie','Shruggie','Ugly','Juggly'];
+
+var imageCount = 0;
 
 // construct api call
 var baseURL = "https://api.flickr.com/services/rest/";
@@ -16,6 +21,9 @@ var apiCall = baseURL + "?format=" + format + "&method=" + method +
                         "&api_key=" + apiKey + "&gallery_id=" + galleryId +
                         "&nojsoncallback=" + noJSONCallback;
 
+// var nameApiCall = "http://api.randomuser.me/?gender=female";
+
+console.log(apiCall);
 // httpGetAsync(url, callback):
 // sends an http GET request and performs some
 // callback function on the responseText
@@ -36,8 +44,9 @@ function initializeGalleryFromJSON(json) {
   var obj = JSON.parse(json);
   var p = obj.photos.photo;
   var photoCount = p.length;
-  animateValue("value", 0, photoCount, 500);
+  animateValue("value", 0, photoCount, 150);
   for (var i = 0; i < photoCount; i++) {
+    console.log(p[i].title);
     url =  "http://c2.staticflickr.com/"
     url += p[i].farm + '/';
     url += p[i].server + '/';
@@ -45,15 +54,21 @@ function initializeGalleryFromJSON(json) {
     url += p[i].secret + '_n.jpg';
     photoUrls.push(url);
     var image = document.createElement('div');
+    image.setAttribute('class','image');
     image.setAttribute('style','background-image: url('+url+');');
     image.setAttribute('id',i);
     image.setAttribute('onclick','revealLightbox('+i+")");
     var node = document.createElement('li');
     node.setAttribute('class','imageWrapper');
+    var status = document.createElement('div');
+    var randomDist = Math.floor((Math.random() * 9) + 2)
+    var activityDot = '<label id="activity">\u2022</label>';
+    status.innerHTML = activityDot + ' About ' + randomDist + ' miles away';
+    status.setAttribute('class','caption');
     node.appendChild(image);
+    node.appendChild(status);
     document.getElementById('imageGallery').appendChild(node);
   }
-
 }
 
 // revealLightbox(id):
@@ -65,7 +80,10 @@ function revealLightbox(id) {
   var thumbnail = document.getElementById(id);
   var imageUrl = thumbnail.style.backgroundImage.slice(4,-1).replace(/"/g, "");
   var overlayImage = document.getElementById('overlayImage');
+  var caption = document.getElementById('caption');
   overlayImage.setAttribute('src',imageUrl);
+  caption.innerHTML = photoNames[id];
+  overlayImage.setAttribute('alt',photoNames[id]);
   var overlay = document.getElementById('overlay');
   overlay.setAttribute('style','display: block;');
 
@@ -78,19 +96,25 @@ function revealLightbox(id) {
   // anonymous onkeydown-triggered function():
   // implements carousel for left and right arrow keys
   document.onkeydown = function(e) {
-    // left arrow key pressed
-    if (e.keyCode == '37') {
-      if (currentImageId > 0) {
-        overlayImage.setAttribute('src',photoUrls[--currentImageId]);
+      // left arrow key pressed
+      if (e.keyCode == '37') {
+        if (currentImageId == 0) {
+          currentImageId = photoUrls.length;
+        }
+        caption.innerHTML = photoNames[currentImageId-1];
+        overlayImage.setAttribute('src',photoUrls[currentImageId-1]);
+        overlayImage.setAttribute('alt',photoNames[--currentImageId]);
+      }
+      // right arrow key pressed
+      if (e.keyCode == '39') {
+        if (currentImageId == photoUrls.length-1) {
+          currentImageId = -1;
+        }
+        caption.innerHTML = photoNames[currentImageId+1];
+        overlayImage.setAttribute('src',photoUrls[currentImageId+1]);
+        overlayImage.setAttribute('alt',photoNames[++currentImageId]);
       }
     }
-    // right arrow key pressed
-    if (e.keyCode == '39') {
-      if (currentImageId < photoUrls.length-1) {
-        overlayImage.setAttribute('src',photoUrls[++currentImageId]);
-      }
-    }
-  }
 }
 
 // animateValue(id, start, end, duration)
