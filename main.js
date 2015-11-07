@@ -4,6 +4,7 @@
 
 // global data storage of photos
 var photoUrls = new Array();
+var imageCount = 0;
 
 // construct api call
 var baseURL = "https://api.flickr.com/services/rest/";
@@ -45,15 +46,21 @@ function initializeGalleryFromJSON(json) {
     url += p[i].secret + '_n.jpg';
     photoUrls.push(url);
     var image = document.createElement('div');
+    image.setAttribute('class','image');
     image.setAttribute('style','background-image: url('+url+');');
     image.setAttribute('id',i);
     image.setAttribute('onclick','revealLightbox('+i+")");
     var node = document.createElement('li');
     node.setAttribute('class','imageWrapper');
+    var status = document.createElement('div');
+    var randomDist = Math.floor((Math.random() * 9) + 2)
+    var activityDot = '<label id="activity">\u2022</label>'
+    status.innerHTML = activityDot + ' About ' + randomDist + ' miles away';
+    status.setAttribute('class','caption');
     node.appendChild(image);
+    node.appendChild(status);
     document.getElementById('imageGallery').appendChild(node);
   }
-
 }
 
 // revealLightbox(id):
@@ -78,17 +85,27 @@ function revealLightbox(id) {
   // anonymous onkeydown-triggered function():
   // implements carousel for left and right arrow keys
   document.onkeydown = function(e) {
-    // left arrow key pressed
-    if (e.keyCode == '37') {
-      if (currentImageId > 0) {
-        overlayImage.setAttribute('src',photoUrls[--currentImageId]);
+    if (imageCount < photoUrls.length-1) {
+      // left arrow key pressed
+      if (e.keyCode == '37') {
+        // NOPE
       }
-    }
-    // right arrow key pressed
-    if (e.keyCode == '39') {
+      // right arrow key pressed
+      if (e.keyCode == '39') {
+        // LIKE
+      }
+      document.getElementById(currentImageId).removeAttribute('onclick');
       if (currentImageId < photoUrls.length-1) {
         overlayImage.setAttribute('src',photoUrls[++currentImageId]);
       }
+      else if (currentImageId == photoUrls.length-1) {
+        currentImageId = 0;
+        overlayImage.setAttribute('src',photoUrls[currentImageId]);
+      }
+      imageCount++;
+    }
+    else {
+      overlay.setAttribute('style','display: none;');
     }
   }
 }
