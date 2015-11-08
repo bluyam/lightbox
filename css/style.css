@@ -157,7 +157,8 @@ a {
 	position: fixed;
 	width: 320px;
 	color: black;
-	border: 15px solid #FFF;
+	border: 20px solid #FFF;
+	border-radius: 25px;
 	background-color: white;
 	font-size: 40%;
 	left: 50%;
@@ -166,14 +167,15 @@ a {
 }
 
 .bio {
+	display: none;
 	margin-top:  -1.8em;
 	position: absolute;
 	width: inherit;
-	font-size: 400%;
+	font-size: 350%;
 	padding-top: .35em;
 	padding-bottom: .35em;
 	z-index: 10;
-	color: white;
+	color: #ccc;
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
