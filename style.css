@@ -153,16 +153,27 @@ a {
 	position: relative;
 	margin: 0 auto;
 	overflow: hidden;
-	margin-top: 10%;
-	height: 250px;
-	border: 5px solid #FFF;
-	/*padding-bottom: 10em;
-	background-color: white;*/
+	width: 250px;
 }
 
-#caption {
+#card {
 	position: relative;
+	margin: 0 auto;
+	width: 250px;
+	margin-top: 15em;
+	color: black;
+	border: 15px solid #FFF;
+	background-color: white;
+	font-size: 40%;
+}
+
+#snapshot {
+	margin-top:  -1.8em;
+	position: absolute;
+	width: inherit;
+	padding-top: .35em;
+	padding-bottom: .35em;
 	z-index: 10;
-	/*color: grey;
-	background-color: white;*/
+	color: white;
+	background-color: rgba(0, 0, 0, 0.5);
 }
