@@ -4,11 +4,14 @@
 
 // global data storage of photos
 var photoUrls = new Array();
+
+// cat names
 var photoNames = ['Fluffy','Muffy','Buffy','Tuffy','Scruffy',
                   'Cuddly','Puddly','Ruddy','Muddy','Buddy',
                   'Sluggy','Druggie','Shruggie','Ugly','Juggly'];
 
-var imageCount = 0;
+// cat ages
+var ages = [1,4,2,3,4,1,2,3,4,3,2,1,2,3,4];
 
 // construct api call
 var baseURL = "https://api.flickr.com/services/rest/";
@@ -21,9 +24,6 @@ var apiCall = baseURL + "?format=" + format + "&method=" + method +
                         "&api_key=" + apiKey + "&gallery_id=" + galleryId +
                         "&nojsoncallback=" + noJSONCallback;
 
-// var nameApiCall = "http://api.randomuser.me/?gender=female";
-
-console.log(apiCall);
 // httpGetAsync(url, callback):
 // sends an http GET request and performs some
 // callback function on the responseText
@@ -61,9 +61,9 @@ function initializeGalleryFromJSON(json) {
     var node = document.createElement('li');
     node.setAttribute('class','imageWrapper');
     var status = document.createElement('div');
-    var randomDist = Math.floor((Math.random() * 9) + 2)
+    var random = Math.floor((Math.random() * 9) + 2)
     var activityDot = '<label id="activity">\u2022</label>';
-    status.innerHTML = activityDot + ' About ' + randomDist + ' miles away';
+    status.innerHTML = activityDot + ' About ' + random + ' miles away';
     status.setAttribute('class','caption');
     node.appendChild(image);
     node.appendChild(status);
@@ -81,8 +81,10 @@ function revealLightbox(id) {
   var imageUrl = thumbnail.style.backgroundImage.slice(4,-1).replace(/"/g, "");
   var overlayImage = document.getElementById('overlayImage');
   var caption = document.getElementById('caption');
+  var bio = document.getElementById('snapshot');
   overlayImage.setAttribute('src',imageUrl);
-  caption.innerHTML = photoNames[id];
+  caption.innerHTML = 'Join today to match with '+photoNames[id]+'.';
+  bio.innerHTML = photoNames[id]+', age '+ages[id];
   overlayImage.setAttribute('alt',photoNames[id]);
   var overlay = document.getElementById('overlay');
   overlay.setAttribute('style','display: block;');
@@ -101,7 +103,8 @@ function revealLightbox(id) {
         if (currentImageId == 0) {
           currentImageId = photoUrls.length;
         }
-        caption.innerHTML = photoNames[currentImageId-1];
+        caption.innerHTML = 'Join today to match with '+photoNames[currentImageId-1]+'.';
+        bio.innerHTML = photoNames[currentImageId-1]+', age '+ages[currentImageId-1];
         overlayImage.setAttribute('src',photoUrls[currentImageId-1]);
         overlayImage.setAttribute('alt',photoNames[--currentImageId]);
       }
@@ -110,7 +113,8 @@ function revealLightbox(id) {
         if (currentImageId == photoUrls.length-1) {
           currentImageId = -1;
         }
-        caption.innerHTML = photoNames[currentImageId+1];
+        caption.innerHTML = 'Join today to match with '+photoNames[currentImageId+1]+'.';
+        bio.innerHTML = photoNames[currentImageId+1]+', age '+ages[currentImageId+1];
         overlayImage.setAttribute('src',photoUrls[currentImageId+1]);
         overlayImage.setAttribute('alt',photoNames[++currentImageId]);
       }
