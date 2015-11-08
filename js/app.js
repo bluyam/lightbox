@@ -9,9 +9,6 @@ var photoNames = ['Fluffy','Muffy','Buffy','Tuffy','Scruffy',
                   'Cuddly','Puddly','Ruddy','Muddy','Buddy',
                   'Sluggy','Druggie','Shruggie','Ugly','Juggly'];
 
-// cat ages (must be static)
-var ages = [1,4,2,3,4,1,2,3,4,3,2,1,2,3,4];
-
 // construct api call
 var baseURL = "https://api.flickr.com/services/rest/";
 var format = "json";
@@ -52,7 +49,7 @@ function generatePhotoURL(photo) {
   photoUrls.push(url);
 }
 
-// generateThumbnail(index):
+// generateThumbnail(i):
 // generates thumbnail div from the ith photoUrl
 function generateThumbnail(i) {
   var image = document.createElement('div');
@@ -107,14 +104,12 @@ function initializeGalleryFromJSON(json) {
   }
 }
 
-// refreshOverlay(caption, bio, overlayImage, currentImageId):
+// refreshOverlay(currentImageId):
 // refresh elements within overlay based on next image
 function refreshOverlay(currentImageId) {
   var caption = document.getElementById('caption');
-  var bio = document.getElementById('bio');
   var overlayImage = document.getElementById('overlayImage');
   caption.innerHTML = 'Join today to match with '+photoNames[currentImageId]+'.';
-  bio.innerHTML = photoNames[currentImageId]+', age '+ages[currentImageId];
   overlayImage.setAttribute('src',photoUrls[currentImageId]);
 }
 
