@@ -41,6 +41,7 @@ function httpGetAsync(url, callback) {
 // initialize webpage by retrieving images from gallery
 // and then adding the appropriate html
 function initializeGalleryFromJSON(json) {
+  setMenu();
   var obj = JSON.parse(json);
   var p = obj.photos.photo;
   var photoCount = p.length;
@@ -121,7 +122,7 @@ function revealLightbox(id) {
     }
 }
 
-// animateValue(id, start, end, duration)
+// animateValue(id, start, end, duration):
 // animates count up to number of matches
 function animateValue(id, start, end, duration) {
     var range = end - start;
@@ -138,4 +139,16 @@ function animateValue(id, start, end, duration) {
     }, stepTime);
 }
 
+// setMenu():
+// removes menu if there's not enough room for it to be fully displayed
+function setMenu() {
+  if (window.innerWidth < 747) {
+    document.getElementById('topmenu').setAttribute('style','display: none;');
+  }
+  else {
+    document.getElementById('topmenu').setAttribute('style','display: block;');
+  }
+}
+
+window.onresize = setMenu;
 httpGetAsync(apiCall, initializeGalleryFromJSON);
