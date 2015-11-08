@@ -1,5 +1,4 @@
-# lightbox
+# Whisker
 
-Demonstration of frontend engineering skills using lightbox.
-
-Final product will be complete on November 5th!
+A webpage for the unfortunately hypothetical Whisker (Tinder for cats) app.
+Demonstrates ability to pull object data from public api and working knowledge of native JavaScript. 
