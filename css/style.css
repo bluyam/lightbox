@@ -96,8 +96,8 @@ h1 {
 	display: inline-block;
 	background: white;
 	margin: 0px;
-  width: 300;
-  height: 300;
+  width: 300px;
+  height: 300px;
 	border: 1px solid white;
   overflow: hidden;
 	position: relative;
@@ -106,8 +106,8 @@ h1 {
 .image {
 	position: absolute;
   display: block;
-	width: 300;
-	height: 300;
+	width: 300px;
+	height: 300px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -166,19 +166,6 @@ a {
 	top: 50%;
 }
 
-.bio {
-	display: none;
-	margin-top:  -1.8em;
-	position: absolute;
-	width: inherit;
-	font-size: 350%;
-	padding-top: .35em;
-	padding-bottom: .35em;
-	z-index: 10;
-	color: #ccc;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-
 .status {
 	font-size: 450%;
 	margin-bottom: 13.8px;
@@ -186,7 +173,7 @@ a {
 
 .bottommenu {
 	margin: .5em;
-	padding-left: 0;
+	padding-left: 0px;
 }
 
 .bottommenu li {
